@@ -20,15 +20,9 @@ def task1(input):
 
     '''
 
-    # cmd = {
-    #     "cdTop" : 'cd /',
-    #     "cdOut" : 'cd ..',
-    #     "cdIn" : 'cd ',
-    #     "list" : 'ls'
-    # }
-
     directories = []
-    dirSize = []
+    innerDirSize = []
+    upperDirSize = []
 
     index = 0
 
@@ -37,30 +31,43 @@ def task1(input):
         if 'cd ' in line:
             # print(line.split(" "))
             directories.append(line.split()[2])
-            dirSize.append(0)
+            innerDirSize.append(0)
+            upperDirSize.append(0)
             curIndex = index
             index += 1  
         if re.search("[0-9].*", line):
-            dirSize[curIndex] += int(line.split(" ")[0])
+            innerDirSize[curIndex] += int(line.split(" ")[0])
+    
+    for i in directories:
+        if not (i == '/' or i == '..'):
+            curIndex = directories.index(i)
+            tmp = curIndex+1
+            while tmp < len(directories):
+                if directories[tmp] == '..':
+                    break
+                tmp += 1
+            upperDirSize[curIndex] = sum(innerDirSize[curIndex:tmp])
 
+    totalSize = 0
+    for a in upperDirSize:
+        if a <= 100000: 
+            totalSize += a
+    
     print(directories)
-    print(dirSize)
+    print(innerDirSize)
+    print(upperDirSize)
+    
+    return totalSize
 
-    return index
-
-
-
-        
 
 # def task2(input):
-
 
 
 
 def main():
 
     problem_name = sys.argv[1]
-    with open(f"{problem_name}.txt") as f:
+    with open(f"{problem_name}") as f:
         input = [line.rstrip() for line in f]
 
     print(f"Task1: {task1(input)}")
