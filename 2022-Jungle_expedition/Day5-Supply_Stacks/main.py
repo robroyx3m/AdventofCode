@@ -82,7 +82,7 @@ def storeColumns(columnsAmount, input):
 
 def main():
     
-    # with open('testInput.txt') as i:
+    # with open('testinput.txt') as i:
     #     input = [line.rstrip() for line in i]
     
     with open('crates.txt') as i:

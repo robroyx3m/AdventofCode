@@ -4,7 +4,7 @@ def task1(lowerSub, upperSub):
     
     totalPrioSum = 0
 
-    with open('itemsInRucksacks.txt') as i:
+    with open('itemsinrucksacks.txt') as i:
         for line in i:
             lenString = len(list(line))-1
             halfString = int(lenString/2)
@@ -26,8 +26,8 @@ def task2(lowerSub, upperSub):
 
     totalPrioSum = 0
 
-    #with open('testInput.txt') as i:
-    with open('itemsInRucksacks.txt') as i:
+    #with open('testinput.txt') as i:
+    with open('itemsinrucksacks.txt') as i:
         rucksacks = [line.rstrip() for line in i]
 
         a = 0

@@ -53,10 +53,10 @@ def task2(input):
 
 def main():
     
-    # with open('testInput.txt') as i:
+    # with open('testinput.txt') as i:
     #     input = [line.rstrip() for line in i]
     
-    with open('sectionAssignments.txt') as i:
+    with open('sectionassignments.txt') as i:
         input = [line.rstrip() for line in i]
 
     task1(input)

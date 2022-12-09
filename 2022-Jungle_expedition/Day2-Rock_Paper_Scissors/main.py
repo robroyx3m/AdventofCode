@@ -56,7 +56,7 @@ def main():
     totalPoints_task2 = 0
     # totalLines = 0
 
-    with open('encryptedStrategyGuide.txt') as i:
+    with open('encryptedstrategyguide.txt') as i:
         for line in i:
             # totalLines += 1
 

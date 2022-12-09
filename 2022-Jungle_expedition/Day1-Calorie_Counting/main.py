@@ -4,7 +4,7 @@ def main():
     food = []
     totalCaloriesPerElf = []
 
-    with open('calorycountPerElf.txt') as i:
+    with open('calorycountperelf.txt') as i:
         for line in i:
             if line == '\n':
                 totalCaloriesPerElf.append(sum(food))
