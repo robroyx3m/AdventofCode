@@ -49,12 +49,12 @@ def task1(input):
 
 
 def task2(input):
-    stonePos = list(findStoneCoord(input))
-    sandPos = []
+    stonePos = findStoneCoord(input)
+    sandPos = set()
 
     rockBottom = max(a[1] for a in stonePos) + 2
 
-    stonePos.append((500,rockBottom))
+    stonePos.add((500,rockBottom))
 
     drawMap(stonePos, sandPos)
 
@@ -77,10 +77,10 @@ def task2(input):
                 curSandPos[0] += 1
                 curSandPos[1] += 1
             else:
-                sandPos.append((curSandPos[0], curSandPos[1]))
+                sandPos.add((curSandPos[0], curSandPos[1]))
                 break
 
-        if sandPos[-1] == (500,0):
+        if (500,0) in sandPos:
             break
 
     end_time = time.time()
@@ -153,6 +153,7 @@ def findStoneCoord(input):
     return set(tmp) 
 
 
+# Run with ./main.py input.txt
 def main():
     problem_name = sys.argv[1]
     with open(f"{problem_name}") as f:
