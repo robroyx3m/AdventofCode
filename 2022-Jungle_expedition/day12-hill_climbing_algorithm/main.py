@@ -1,32 +1,34 @@
 #!/usr/bin/python3
 
+""" Day 12 AoC
+    https://adventofcode.com/2022/day/12
+"""
 
 import sys
 
-#
-#     https://adventofcode.com/2022/day/12
-# 
+
+def task1(data):
+    """ Task 1 solution """
+
+    return 0
 
 
-def task1(input):
-    
+def task2(data):
+    """ Task 2 solution """
+    return 0
 
-    # return len(set(visTreesCoord))
 
-
-# def task2(input):
-    
-   
 
 
 def main():
+    """ Imports data and executes task1 and task2 """
 
     problem_name = sys.argv[1]
-    with open(f"{problem_name}") as f:
-        input = [line.rstrip() for line in f]
+    with open(f"{problem_name}", encoding="utf-8") as tmp:
+        data = [line.rstrip() for line in tmp]
 
-    print(f"Task1: {task1(input)}")
-    # print(f"Task2: {task2(input)}")
+    print(f"Task1: {task1(data)}\n")
+    # print(f"Task2: {task2(data)}")
 
     return 0
 
