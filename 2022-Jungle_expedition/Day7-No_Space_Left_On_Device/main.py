@@ -20,52 +20,75 @@ def task1(input):
 
     '''
 
-    directories = []
-    innerDirSize = []
-    upperDirSize = []
-
-    index = 0
+    dirFiles = {}
+    dirFolders = {}
 
     for line in input:
-        # print(line)  
-        if 'cd ' in line:
-            # print(line.split(" "))
-            directories.append(line.split()[2])
-            innerDirSize.append(0)
-            upperDirSize.append(0)
-            curIndex = index
-            index += 1  
-        if re.search("[0-9].*", line):
-            innerDirSize[curIndex] += int(line.split(" ")[0])
-    
-    for i in directories:
-        if not (i == '/' or i == '..'):
-            curIndex = directories.index(i)
-            tmp = curIndex+1
-            while tmp < len(directories):
-                if directories[tmp] == '..':
-                    break
-                tmp += 1
-            upperDirSize[curIndex] = sum(innerDirSize[curIndex:tmp])
+        # print(line)
+        if '$ cd /' in line:
+            dirFiles.update({'/':0})
+            dirFolders.update({'/':''})
+            curDir = '/'
+        elif '$ cd ..' in line:
+            pass
+        elif 'dir ' in line:
+            dirFolders[curDir] += f'{line.split(" ")[1]} '
+        elif '$ cd ' in line:
+            dirFiles.update({f'{line.split(" ")[2]}':0})
+            dirFolders.update({f'{line.split(" ")[2]}':''})
+            curDir = line.split(" ")[2]
+        elif '$ ls' in line:
+            pass
+        elif re.search('[0-9]', line):
+            dirFiles[curDir] += int(line.split(" ")[0])
 
-    totalSize = 0
-    for a in upperDirSize:
-        if a <= 100000: 
-            totalSize += a
+    # print(dirFolders)
+    # print()
+    # print(dirFiles)
+    # print()
+
+    totalDirSizes = {}
+    for key in dirFolders:
+        # print(key)
+        totalDirSizes.update({key:findFolderSizes(key, dirFiles, dirFolders)})
+
+    goalDirs = 0
+    for size in totalDirSizes.values():
+        if size <= 100000:
+            goalDirs += size
+
+    print(totalDirSizes)
+    print()
+
+    return goalDirs
+
+
+def findFolderSizes(posKey, files, folders):
+
+    if folders[posKey] == '':
+        # print(files[posKey])
+        return files[posKey]   
+
+    tmpSum = files[posKey]
+
+    # print(folders[posKey].split(" "))
+
+    for dir in folders[posKey].split(" "):
+        if dir == '':
+            break
+        else:
+            # print(dir)
+            tmpSum += findFolderSizes(dir, files, folders)
     
-    print(directories)
-    print(innerDirSize)
-    print(upperDirSize)
-    
-    return totalSize
+    return tmpSum
 
 
 # def task2(input):
 
 
 
+# Run with ./main.py input.txt
 def main():
-
     problem_name = sys.argv[1]
     with open(f"{problem_name}") as f:
         input = [line.rstrip() for line in f]
